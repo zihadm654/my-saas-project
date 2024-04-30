@@ -63,10 +63,12 @@ model User {
   role          UserRole  @default(USER)
   createdAt     DateTime  @default(now()) @map(name: "created_at")
   updatedAt     DateTime  @default(now()) @map(name: "updated_at")
+  favoriteIds String[]
 
   accounts Account[]
   sessions Session[]
   listings Listing[]
+  reservations Reservation[]
 
   stripeCustomerId       String?                @unique @map(name: "stripe_customer_id")
   stripeSubscriptionId   String?                @unique @map(name: "stripe_subscription_id")
@@ -115,68 +117,31 @@ model TwoFactorConfirmation {
   @@unique([userId])
 }
 model Listing {
-  id        String @id @default(cuid())
-  photos    String[]
-  location  String
-  businessNature String
-  currency  String
-  individualNbr String?
-  individualTaxIdNbr String?
-  businessRegistrationNbr String?
-  businessTaxIdNbr String?
-  price     Float
-  isPaid    Boolean
-  listingPaidType String
-  noOfPromotionDays Int
-  eventType EventType
-  category  String
-  highlight String
-  name      String
-  imageUrl  String
-  dateType  String
-  nbrOfDays Int
-  hoursPerDay Int 
-  dateRanges DateTime[]
-  maxAttendances Int
-  language  String
-  status    Boolean
-  requirements String[]
-  otherInformation String?
-  guestInformation String?
-  hostInformation String?
-  cancellationPolicy String?
-  hostSkillLevel String?
-  isDiscountAvailable Boolean
-  discount  Float
-  business  String
-  experiential String
-  healthAndWellness String?
-  specialInterest String?
-  host User @relation(fields: [hostId], references: [id], onDelete: Cascade)
-  hostId String
-  createdAt DateTime @default(now()) 
-}
-model place {
-  id        String   @id @default(cuid())
-  title String 
+  id             String @id @default(cuid())
+  title String
   description String
-  listing_status Boolean
-  lat Float
-  long Float
-  businessNature String
-  individualNbr String?
-  individualTaxIdNbr String?
-  businessRegistrationNbr String?
-  businessTaxIdNbr String?
-  street String?
-  city String?
-  province String?
-  postal_code Int?
-  country String?
-  subtitle String?
-  place_type String
-  booking_policy String
-  rating Float
-  count Int[]
-  images String[]
+  imageSrc String
+  createdAt DateTime @default(now())
+  category  String
+  roomCount Int
+  bathroomCount Int
+  guestCount Int
+  locationValue String
+  userId String 
+  price Int
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  reservations Reservation[]
+}
+model Reservation {
+  id String @id @default(cuid())
+  userId String 
+  listingId String   
+  startDate DateTime
+  endDate DateTime
+  totalPrice Int
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  listing Listing @relation(fields: [listingId], references: [id], onDelete: Cascade)
 }
