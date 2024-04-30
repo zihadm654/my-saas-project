@@ -1,0 +1,182 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum UserRole {
+  ADMIN
+  USER
+}
+enum EventType {
+  OnlineEvent
+  OnsiteEvent
+}
+
+model Account {
+  id                String   @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?  @db.Text
+  access_token      String?  @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?  @db.Text
+  session_state     String?
+  createdAt         DateTime @default(now()) @map(name: "created_at")
+  updatedAt         DateTime @default(now()) @map(name: "updated_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+  @@index([userId])
+  @@map(name: "accounts")
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@map(name: "sessions")
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String?   @unique
+  emailVerified DateTime?
+  image         String?
+  password      String?
+  role          UserRole  @default(USER)
+  createdAt     DateTime  @default(now()) @map(name: "created_at")
+  updatedAt     DateTime  @default(now()) @map(name: "updated_at")
+
+  accounts Account[]
+  sessions Session[]
+  listings Listing[]
+
+  stripeCustomerId       String?                @unique @map(name: "stripe_customer_id")
+  stripeSubscriptionId   String?                @unique @map(name: "stripe_subscription_id")
+  stripePriceId          String?                @map(name: "stripe_price_id")
+  stripeCurrentPeriodEnd DateTime?              @map(name: "stripe_current_period_end")
+  isTwoFactorEnabled Boolean @default(false)
+  twoFactorConfirmation TwoFactorConfirmation?
+
+  @@map(name: "users")
+}
+
+model VerificationToken {
+  id      String   @id @default(cuid())
+  email   String
+  token   String   @unique
+  expires DateTime
+
+  @@unique([email, token])
+  @@map(name: "verification_tokens")
+}
+
+model PasswordResetToken {
+  id      String   @id @default(cuid())
+  email   String
+  token   String   @unique
+  expires DateTime
+
+  @@unique([email, token])
+}
+
+model TwoFactorToken {
+  id      String   @id @default(cuid())
+  email   String
+  token   String   @unique
+  expires DateTime
+
+  @@unique([email, token])
+}
+
+model TwoFactorConfirmation {
+  id String @id @default(cuid())
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId])
+}
+model Listing {
+  id        String @id @default(cuid())
+  photos    String[]
+  location  String
+  businessNature String
+  currency  String
+  individualNbr String?
+  individualTaxIdNbr String?
+  businessRegistrationNbr String?
+  businessTaxIdNbr String?
+  price     Float
+  isPaid    Boolean
+  listingPaidType String
+  noOfPromotionDays Int
+  eventType EventType
+  category  String
+  highlight String
+  name      String
+  imageUrl  String
+  dateType  String
+  nbrOfDays Int
+  hoursPerDay Int 
+  dateRanges DateTime[]
+  maxAttendances Int
+  language  String
+  status    Boolean
+  requirements String[]
+  otherInformation String?
+  guestInformation String?
+  hostInformation String?
+  cancellationPolicy String?
+  hostSkillLevel String?
+  isDiscountAvailable Boolean
+  discount  Float
+  business  String
+  experiential String
+  healthAndWellness String?
+  specialInterest String?
+  host User @relation(fields: [hostId], references: [id], onDelete: Cascade)
+  hostId String
+  createdAt DateTime @default(now()) 
+}
+model place {
+  id        String   @id @default(cuid())
+  title String 
+  description String
+  listing_status Boolean
+  lat Float
+  long Float
+  businessNature String
+  individualNbr String?
+  individualTaxIdNbr String?
+  businessRegistrationNbr String?
+  businessTaxIdNbr String?
+  street String?
+  city String?
+  province String?
+  postal_code Int?
+  country String?
+  subtitle String?
+  place_type String
+  booking_policy String
+  rating Float
+  count Int[]
+  images String[]
+}
