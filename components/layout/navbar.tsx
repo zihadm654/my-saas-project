@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { MainNavItem } from "@/types";
+// import { MainNavItem } from "@/types";
 import { User } from "next-auth";
 
 import { cn } from "@/lib/utils";
@@ -15,7 +15,7 @@ import { UserAccountNav } from "./user-account-nav";
 
 interface NavBarProps {
   user: Pick<User, "name" | "image" | "email"> | undefined;
-  items?: MainNavItem[];
+  items?: any[];
   children?: React.ReactNode;
   rightElements?: React.ReactNode;
   scroll?: boolean;

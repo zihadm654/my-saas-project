@@ -6,7 +6,6 @@ import bcrypt from "bcryptjs";
 import * as z from "zod";
 
 import { currentUser } from "@/lib/auth";
-// import { update } from '@/auth';
 import { prisma } from "@/lib/db";
 import { sendVerificationEmail } from "@/lib/email";
 import { generateVerificationToken } from "@/lib/token";
@@ -24,7 +23,7 @@ export const settings = async (values: z.infer<typeof SettingsSchema>) => {
     return { error: "Unauthorized" };
   }
 
-  if (user.isOAuth) {
+  if (user.id) {
     values.email = undefined;
     values.password = undefined;
     values.newPassword = undefined;

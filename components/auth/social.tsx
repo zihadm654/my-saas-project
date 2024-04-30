@@ -1,10 +1,10 @@
 "use client";
 
-// import { FcGoogle } from 'react-icons/fc';
-// import { FaGithub } from 'react-icons/fa';
 import { useSearchParams } from "next/navigation";
 import { DEFAULT_LOGIN_REDIRECT } from "@/routes";
 import { signIn } from "next-auth/react";
+import { FaGithub } from "react-icons/fa";
+import { FcGoogle } from "react-icons/fc";
 
 import { Button } from "@/components/ui/button";
 

@@ -1,4 +1,4 @@
-import { TListing, TPlaces } from '@/utils/schema';
+import { TListing, TPlaces } from "@/utils/schema";
 
 export type User = {
   token: string;
@@ -26,7 +26,7 @@ export interface safeListings extends TListing {
 
 export type safePlaces = Omit<
   TPlaces,
-  'id' | 'rating' | 'creadtedAt' | '_count' | 'rating' | 'images'
+  "id" | "rating" | "creadtedAt" | "_count" | "rating" | "images"
 > & {
   id: number;
   createdAt: string;

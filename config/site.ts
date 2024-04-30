@@ -1,9 +1,9 @@
-import { SidebarNavItem, SiteConfig } from "types";
+// import { SidebarNavItem, SiteConfig } from "types";
 import { env } from "@/env.mjs";
 
 const site_url = env.NEXT_PUBLIC_APP_URL;
 
-export const siteConfig: SiteConfig = {
+export const siteConfig: any = {
   name: "SaaS Starter",
   description:
     "Get your project off to an explosive start with SaaS Starter! Harness the power of Next.js 14, Prisma, Neon, Auth.js v5, Resend, React Email, Shadcn/ui and Stripe to build your next big thing.",
@@ -16,7 +16,7 @@ export const siteConfig: SiteConfig = {
   mailSupport: "support@saas-starter.com",
 };
 
-export const footerLinks: SidebarNavItem[] = [
+export const footerLinks: any[] = [
   {
     title: "Company",
     items: [

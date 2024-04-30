@@ -1,6 +1,6 @@
-import { MarketingConfig } from "types"
+// import { MarketingConfig } from "types"
 
-export const marketingConfig: MarketingConfig = {
+export const marketingConfig: any = {
   mainNav: [
     {
       title: "Pricing",
@@ -15,4 +15,4 @@ export const marketingConfig: MarketingConfig = {
       href: "/docs",
     },
   ],
-}
+};

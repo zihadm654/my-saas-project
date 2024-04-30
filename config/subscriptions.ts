@@ -1,7 +1,7 @@
-import { SubscriptionPlan } from "types";
+// import { SubscriptionPlan } from "types";
 import { env } from "@/env.mjs";
 
-export const pricingData: SubscriptionPlan[] = [
+export const pricingData: any[] = [
   {
     title: "Starter",
     description: "For Beginners",

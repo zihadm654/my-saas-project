@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { UserSubscriptionPlan } from "@/types";
+
+// import { UserSubscriptionPlan } from "@/types";
 
 import { pricingData } from "@/config/subscriptions";
 import { cn } from "@/lib/utils";
@@ -13,16 +14,18 @@ import { BillingFormButton } from "@/components/forms/billing-form-button";
 import { HeaderSection } from "@/components/shared/header-section";
 import { Icons } from "@/components/shared/icons";
 
-import { SubscriptionPlan } from "../types/index";
+// import { SubscriptionPlan } from "../types/index";
 
 interface PricingCardsProps {
   userId?: string;
-  subscriptionPlan?: UserSubscriptionPlan;
+  subscriptionPlan?: any;
 }
 
 export function PricingCards({ userId, subscriptionPlan }: PricingCardsProps) {
   const isYearlyDefault =
-    !subscriptionPlan?.stripeCustomerId || subscriptionPlan.interval === "year" ? true : false;
+    !subscriptionPlan?.stripeCustomerId || subscriptionPlan.interval === "year"
+      ? true
+      : false;
   const [isYearly, setIsYearly] = useState<boolean>(!!isYearlyDefault);
   const signInModal = useSigninModal();
 
@@ -30,7 +33,7 @@ export function PricingCards({ userId, subscriptionPlan }: PricingCardsProps) {
     setIsYearly(!isYearly);
   };
 
-  const PricingCard = ({ offer }: { offer: SubscriptionPlan }) => {
+  const PricingCard = ({ offer }: { offer: any }) => {
     return (
       <div
         className={cn(

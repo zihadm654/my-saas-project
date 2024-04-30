@@ -1,6 +1,6 @@
-import { InfoLdg } from "types";
+// import { InfoLdg } from "types";
 
-export const infos: InfoLdg[] = [
+export const infos: any[] = [
   {
     title: "Empower your projects",
     description:

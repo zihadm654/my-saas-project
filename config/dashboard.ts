@@ -1,6 +1,6 @@
-import { DashboardConfig } from "types"
+// import { DashboardConfig } from "types"
 
-export const dashboardConfig: DashboardConfig = {
+export const dashboardConfig: any = {
   mainNav: [
     {
       title: "Documentation",
@@ -29,4 +29,4 @@ export const dashboardConfig: DashboardConfig = {
       icon: "settings",
     },
   ],
-}
+};

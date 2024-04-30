@@ -1,5 +1,4 @@
 import { User } from "@prisma/client";
-import type { Icon } from "lucide-react";
 
 import { Icons } from "@/components/shared/icons";
 
@@ -23,7 +22,7 @@ export type SidebarNavItem = {
     }
   | {
       href?: string;
-      items: NavLink[];
+      items: any[];
     }
 );
 
@@ -87,4 +86,4 @@ export type InfoLdg = {
   image: string;
   description: string;
   list: InfoList[];
-}
+};
