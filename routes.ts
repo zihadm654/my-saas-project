@@ -10,6 +10,7 @@ export const publicRoutes = [
   "/guides",
   "/pricing",
   "/new-verification",
+  "/listings",
 ];
 
 /**
