@@ -99,94 +99,30 @@ export const PlacesForm = z.object({
   }),
   images: z.array(z.string()),
 });
-const onlineEventSchema = z.object({
-  dateRanges: z.object({
-    date: z.string().min(1, "date should be greater than 1 char").optional(),
-    startTime: z.string(),
-    endTime: z.string(),
-  }),
-  platform: z.string().optional(),
-  link: z.string().url(),
+
+export const ListingSchema = z.object({
+  id: z.string(),
+  userId: z.string(),
+  title: z.string().min(1, "title is required"),
+  description: z.string().min(3, "description is required"),
+  image: z.string().min(1, "image is required"),
+  country: z.string().min(1, "country is required"),
+  state: z.string(),
+  city: z.string(),
+  locationValue: z.string(),
+  gym: z.boolean(),
+  spa: z.boolean(),
+  bar: z.boolean(),
+  laundry: z.boolean(),
+  restaurant: z.boolean(),
+  shopping: z.boolean(),
+  freeparking: z.boolean(),
+  bikeRental: z.boolean(),
+  freeWifi: z.boolean(),
+  movieNights: z.boolean(),
+  swimmingPool: z.boolean(),
+  coffeShop: z.boolean(),
 });
-const onsiteEventSchema = z.object({
-  extraAmount: z.number().positive(),
-  privateGroupHosting: z.string().optional(),
-  privateGroupHostingCharge: z.number().optional(),
-  transferService: z.string().min(1, "minimum 1 char"),
-  latitude: z.number().optional(),
-  longitude: z.number().optional(),
-});
-export const ListingSchema = z
-  .object({
-    // title: z.string().min(1, 'title is required'),
-    // description: z.string().min(5, 'description must be 5 char'),
-    photos: z
-      .array(z.string().min(1, "at least one should be selected"))
-      .min(1, "at least one array should be selected"),
-    location: z.string().min(1, "location is require"),
-    businessNature: z.string().min(1, "should be sent"),
-    currency: z
-      .string()
-      .min(1, "at least one currency value should be selected"),
-    individualNbr: z.string().optional(),
-    individualTaxIdNbr: z.string().optional(),
-    businessRegistrationNbr: z.string().optional(),
-    businessTaxIdNbr: z.string().optional(),
-    price: z.number().positive("number should be positive").optional(),
-    isPaid: z.boolean(),
-    listingPaidType: z.string().min(1, "listing type is required"),
-    noOfPromotionDays: z.number().positive(),
-    eventType: z.string().min(1, "event type is required"),
-    category: z.string().min(1, "minimum 1 char"),
-    highlight: z.string().min(1, "minimum 1 char"),
-    name: z.string().min(1, "minimum 1 char"),
-    imageUrl: z.string().optional(),
-    dateType: z.string().min(1),
-    nbrOfDays: z.number().positive(),
-    hoursPerDay: z.number().positive(),
-    dateRanges: z
-      .object({
-        date: z.string().min(1, "minimum 1 char").optional(),
-        startTime: z.string(),
-        endTime: z.string(),
-      })
-      .optional(),
-    maxAttendances: z.number().positive(),
-    language: z.string(),
-    status: z.string().min(1, "minimum 1 char").optional(),
-    requirements: z.array(z.string().min(1, "minimum 1 char")).optional(),
-    otherInformation: z.string().optional(),
-    guestInformation: z.string().optional(),
-    hostInformation: z.string().optional(),
-    cancellationPolicy: z.string().optional(),
-    hostSkillLevel: z.string(),
-    isDiscountAvailable: z.boolean({
-      required_error: "this field is required",
-      invalid_type_error: "this field must be a boolean",
-    }),
-    discount: z.number().positive().optional(),
-    business: z
-      .array(z.string())
-      .refine((value) => value.some((item) => item), {
-        message: "You have to select at least one item.",
-      }),
-    experiential: z
-      .array(z.string())
-      .refine((value) => value.some((item) => item), {
-        message: "You have to select at least one item.",
-      }),
-    healthAndWellness: z.string().optional(),
-    specialInterest: z.string().optional(),
-    onlineEvent: z.lazy(() => onlineEventSchema).optional(),
-    onsiteEvent: z.lazy(() => onsiteEventSchema).optional(),
-  })
-  .refine((data) => {
-    // Ensure that either onlineEvent or onsiteEvent is present
-    if (!data.onlineEvent && !data.onsiteEvent) {
-      throw new Error("Either onlineEvent or onsiteEvent should be present");
-    }
-    return true;
-  });
 
 export type TListing = z.infer<typeof ListingSchema>;
 export type TPlaces = z.infer<typeof PlacesForm>;

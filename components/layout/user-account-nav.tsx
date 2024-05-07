@@ -11,7 +11,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger
 } from "@/components/ui/dropdown-menu"
-import { CreditCard, LayoutDashboard, LogOut, Settings } from "lucide-react"
+import { CreditCard, LayoutDashboard, LogOut, Plus, Settings } from "lucide-react"
 import type { User } from "next-auth"
 
 interface UserAccountNavProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -44,6 +44,12 @@ export function UserAccountNav({ user }: UserAccountNavProps) {
           <Link href="/dashboard" className="flex items-center space-x-2.5">
             <LayoutDashboard className="size-4" />
             <p className="text-sm">Dashboard</p>
+          </Link>
+        </DropdownMenuItem>
+        <DropdownMenuItem asChild>
+          <Link href="/listings/new" className="flex items-center space-x-2.5">
+            <Plus className="size-4" />
+            <p className="text-sm">Add listing</p>
           </Link>
         </DropdownMenuItem>
         <DropdownMenuItem asChild>
