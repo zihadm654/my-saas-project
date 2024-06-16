@@ -17,11 +17,6 @@ enum UserRole {
   USER
 }
 
-enum EventType {
-  OnlineEvent
-  OnsiteEvent
-}
-
 model Account {
   id                String   @id @default(cuid())
   userId            String
@@ -66,18 +61,15 @@ model User {
   role          UserRole  @default(USER)
   createdAt     DateTime  @default(now()) @map(name: "created_at")
   updatedAt     DateTime  @default(now()) @map(name: "updated_at")
-  favoriteIds   String[]
 
   accounts     Account[]
   sessions     Session[]
-  listings     Listing[]
-  reservations Reservation[]
-  rooms Room[]
 
-  stripeCustomerId       String?                @unique @map(name: "stripe_customer_id")
-  stripeSubscriptionId   String?                @unique @map(name: "stripe_subscription_id")
-  stripePriceId          String?                @map(name: "stripe_price_id")
-  stripeCurrentPeriodEnd DateTime?              @map(name: "stripe_current_period_end")
+  stripeCustomerId       String?   @unique @map(name: "stripe_customer_id")
+  stripeSubscriptionId   String?   @unique @map(name: "stripe_subscription_id")
+  stripePriceId          String?   @map(name: "stripe_price_id")
+  stripeCurrentPeriodEnd DateTime? @map(name: "stripe_current_period_end")
+
   isTwoFactorEnabled     Boolean                @default(false)
   twoFactorConfirmation  TwoFactorConfirmation?
 
@@ -119,98 +111,4 @@ model TwoFactorConfirmation {
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([userId])
-}
-
-model Listing {
-  id            String   @id @default(cuid())
-  userId        String
-  title         String   @db.Text
-  description   String   @db.Text
-  image         String
-  country       String
-  state         String
-  city          String
-  locationValue String   @db.Text
-  gym           Boolean  @default(false)
-  spa           Boolean  @default(false)
-  bar           Boolean  @default(false)
-  laundry       Boolean  @default(false)
-  restaurant    Boolean  @default(false)
-  shopping      Boolean  @default(false)
-  freeparking   Boolean  @default(false)
-  bikeRental    Boolean  @default(false)
-  freeWifi      Boolean  @default(false)
-  movieNights   Boolean  @default(false)
-  swimmingPool  Boolean  @default(false)
-  coffeShop     Boolean  @default(false)
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @default(now())
-
-  reservations Reservation[]
-  Rooms        Room[]
-
-  // @@fulltext([title])
-  User User @relation(fields: [userId], references: [id],onDelete: Cascade)
-
-  @@index([userId])
-}
-
-model Room {
-  id             String  @id @default(cuid())
-  title          String
-  description    String  @db.Text
-  bedCount       Int     @default(0)
-  guestCount     Int     @default(0)
-  bathroomCount  Int     @default(0)
-  kingBed        Int     @default(0)
-  queenBed       Int     @default(0)
-  image          String
-  breakfastPrice Int
-  roomPrice      Int
-  roomService    Boolean @default(false)
-  Tv             Boolean @default(false)
-  balcony        Boolean @default(false)
-  freeWifi       Boolean @default(false)
-  cityView       Boolean @default(false)
-  oceanView      Boolean @default(false)
-  mountainView   Boolean @default(false)
-  forestView     Boolean @default(false)
-  AC             Boolean @default(false)
-  soundProof     Boolean @default(false)
-
-  listingId String
-  Listing   Listing? @relation(fields: [listingId], references: [id], onDelete: Cascade)
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId    String
-
-  reservation Reservation[]
-
-  @@index([listingId])
-  @@index([userId])
-}
-
-model Reservation {
-  id                String   @id @default(cuid())
-  userName          String
-  userId            String
-  listingId         String
-  roomId            String
-  listingOwnerId    String
-  startDate         DateTime
-  endDate           DateTime
-  breakfastIncluded Boolean
-  currency          String
-  totalPrice        Int
-  paymentStatus     Boolean  @default(false)
-  paymentIntentId   String   @unique
-  bookedAt          DateTime @default(now())
-  createdAt         DateTime @default(now())
-
-  user    User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  listing Listing? @relation(fields: [listingId], references: [id], onDelete: Cascade)
-  Room    Room?    @relation(fields: [roomId], references: [id], onDelete: Cascade)
-
-  @@index([listingId])
-  @@index([roomId])
-  @@index([userId])
 }

@@ -2,21 +2,17 @@
 
 import { signIn } from "@/auth";
 import { DEFAULT_LOGIN_REDIRECT } from "@/routes";
-import { LoginSchema } from "@/utils/schema";
 import { getTwoFactorConfirmationByUserId } from "@/utils/two-factor-confirmation";
 import { getTwoFactorTokenByEmail } from "@/utils/two-factor-token";
 import { getUserByEmail } from "@/utils/user";
 import { AuthError } from "next-auth";
-import * as z from "zod";
 
 import { prisma } from "@/lib/db";
 import { sendTwoFactorTokenEmail, sendVerificationEmail } from "@/lib/email";
 import { generateTwoFactorToken, generateVerificationToken } from "@/lib/token";
+import { LoginSchema, TLogin } from "@/lib/validations/schema";
 
-export const login = async (
-  values: z.infer<typeof LoginSchema>,
-  callbackUrl?: string | null,
-) => {
+export const login = async (values: TLogin, callbackUrl?: string | null) => {
   const validatedFields = LoginSchema.safeParse(values);
 
   if (!validatedFields.success) {

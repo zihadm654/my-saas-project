@@ -6,8 +6,8 @@ import Google from "next-auth/providers/google";
 
 import { env } from "@/env.mjs";
 
-import { getUserByEmail } from "./lib/user";
 import { LoginSchema } from "./lib/validations/schema";
+import { getUserByEmail } from "./utils/user";
 
 // import { siteConfig } from "@/config/site"
 // import { getUserByEmail } from "@/lib/user";

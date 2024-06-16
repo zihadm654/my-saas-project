@@ -1,6 +1,6 @@
 import { User } from "@prisma/client";
 
-import { Icons } from "@/components/shared/icons";
+import { Icons } from "../components/shared/icons";
 
 export type NavItem = {
   title: string;
@@ -67,13 +67,13 @@ export type SubscriptionPlan = {
   };
 };
 
-export type UserSubscriptionPlan = SubscriptionPlan &
-  Pick<User, "stripeCustomerId" | "stripeSubscriptionId" | "stripePriceId"> & {
-    stripeCurrentPeriodEnd: number;
-    isPaid: boolean;
-    interval: "month" | "year" | null;
-    isCanceled?: boolean;
-  };
+// export type UserSubscriptionPlan = SubscriptionPlan &
+//   Pick<User, "stripeCustomerId" | "stripeSubscriptionId" | "stripePriceId"> & {
+//     stripeCurrentPeriodEnd: number;
+//     isPaid: boolean;
+//     interval: "month" | "year" | null;
+//     isCanceled?: boolean;
+//   };
 
 export type InfoList = {
   icon: keyof typeof Icons;

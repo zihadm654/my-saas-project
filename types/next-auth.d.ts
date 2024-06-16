@@ -1,5 +1,5 @@
 import { UserRole } from "@prisma/client";
-import NextAuth, { User, type DefaultSession } from "next-auth";
+import NextAuth, { type DefaultSession } from "next-auth";
 import { JWT } from "next-auth/jwt";
 
 type UserId = string;

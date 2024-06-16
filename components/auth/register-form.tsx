@@ -2,13 +2,14 @@
 
 import { useState, useTransition } from "react";
 import { register } from "@/actions/register";
-import { RegisterSchema } from "@/utils/schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signIn } from "next-auth/react";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 import * as z from "zod";
 
 import { cn } from "@/lib/utils";
+import { RegisterSchema } from "@/lib/validations/schema";
 import { Button, buttonVariants } from "@/components/ui/button";
 import {
   Form,
@@ -19,8 +20,6 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { FormError } from "@/components/forms/form-error";
-import { FormSuccess } from "@/components/forms/form-success";
 
 import { Icons } from "../shared/icons";
 
@@ -49,6 +48,7 @@ export const RegisterForm = () => {
       register(values).then((data) => {
         setError(data.error);
         setSuccess(data.success);
+        toast(data.success);
       });
     });
   };
@@ -112,8 +112,6 @@ export const RegisterForm = () => {
               )}
             />
           </div>
-          <FormError message={error} />
-          <FormSuccess message={success} />
           <Button disabled={isPending} type="submit" className="w-full">
             Create an account
           </Button>
@@ -130,7 +128,7 @@ export const RegisterForm = () => {
         </div>
       </div>
       <div className="flex items-center justify-around">
-        <button
+        <Button
           type="button"
           className={cn(buttonVariants({ variant: "outline" }))}
           onClick={() => {
@@ -145,8 +143,8 @@ export const RegisterForm = () => {
             <Icons.google className="mr-2 size-4" />
           )}{" "}
           Google
-        </button>
-        <button
+        </Button>
+        <Button
           type="button"
           className={cn(buttonVariants({ variant: "outline" }))}
           onClick={() => {
@@ -161,7 +159,7 @@ export const RegisterForm = () => {
             <Icons.gitHub className="mr-2 size-4" />
           )}{" "}
           Github
-        </button>
+        </Button>
       </div>
     </div>
   );

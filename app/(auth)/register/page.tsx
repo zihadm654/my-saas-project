@@ -1,16 +1,16 @@
-import Link from "next/link"
+import { Suspense } from "react";
+import Link from "next/link";
 
-import { cn } from "@/lib/utils"
-import { buttonVariants } from "@/components/ui/button"
-import { Icons } from "@/components/shared/icons"
-import { UserAuthForm } from "@/components/forms/user-auth-form"
-import { Suspense } from "react"
-import { RegisterForm } from "@/components/auth/register-form"
+import { cn } from "@/lib/utils";
+import { buttonVariants } from "@/components/ui/button";
+import { RegisterForm } from "@/components/auth/register-form";
+import { UserAuthForm } from "@/components/forms/user-auth-form";
+import { Icons } from "@/components/shared/icons";
 
 export const metadata = {
   title: "Create an account",
   description: "Create an account to get started.",
-}
+};
 
 export default function RegisterPage() {
   return (
@@ -19,7 +19,7 @@ export default function RegisterPage() {
         href="/login"
         className={cn(
           buttonVariants({ variant: "ghost" }),
-          "absolute right-4 top-4 md:right-8 md:top-8"
+          "absolute right-4 top-4 md:right-8 md:top-8",
         )}
       >
         Login
@@ -59,5 +59,5 @@ export default function RegisterPage() {
         </div>
       </div>
     </div>
-  )
+  );
 }
