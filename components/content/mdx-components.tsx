@@ -1,7 +1,7 @@
 import * as React from "react";
 import NextImage, { ImageProps } from "next/image";
 import Link from "next/link";
-import { useMDXComponent } from "next-contentlayer/hooks";
+import { useMDXComponent } from "next-contentlayer2/hooks";
 
 import { cn } from "@/lib/utils";
 import { MdxCard } from "@/components/content/mdx-card";
@@ -158,7 +158,7 @@ const components = {
   code: ({ className, ...props }) => (
     <code
       className={cn(
-        "relative rounded-sm bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm",
+        "relative rounded-md border bg-muted px-[0.4rem] py-1 font-mono text-sm text-foreground",
         className,
       )}
       {...props}
