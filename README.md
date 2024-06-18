@@ -8,8 +8,8 @@
 </p>
 
 <p align="center">
-  <a href="https://twitter.com/miickasmt">
-    <img src="https://img.shields.io/twitter/follow/miickasmt?style=flat&label=miickasmt&logo=twitter&color=0bf&logoColor=fff" alt="Mickasmt Twitter follower count" />
+  <a href="https://twitter.com/zihadm654">
+    <img src="https://img.shields.io/twitter/follow/zihadm654?style=flat&label=zihadm654&logo=twitter&color=0bf&logoColor=fff" alt="zihadm654 Twitter follower count" />
   </a>
 </p>
 
@@ -33,7 +33,7 @@ All seamlessly integrated with the SaaS Starter to accelerate your development a
 Clone & create this repo locally with the following command:
 
 ```bash
-npx create-next-app my-saas-project --example "https://github.com/mickasmt/next-saas-stripe-starter"
+npx create-next-app my-saas-project --example "https://github.com/zihadm654/next-saas-stripe-starter"
 ```
 
 1. Install dependencies using pnpm:
@@ -82,7 +82,7 @@ pnpm run dev
 
 ## Tech Stack + Features
 
-https://github.com/mickasmt/next-saas-stripe-starter/assets/62285783/828a4e0f-30e3-4cfe-96ff-4dfd9cd55124
+https://github.com/zihadm654/next-saas-stripe-starter/assets/62285783/828a4e0f-30e3-4cfe-96ff-4dfd9cd55124
 
 ### Frameworks
 
@@ -110,7 +110,7 @@ https://github.com/mickasmt/next-saas-stripe-starter/assets/62285783/828a4e0f-30
 
 - `useIntersectionObserver` – React hook to observe when an element enters or leaves the viewport
 - `useLocalStorage` – Persist data in the browser's local storage
-- `useScroll` – React hook to observe scroll position ([example](https://github.com/mickasmt/precedent/blob/main/components/layout/navbar.tsx#L12))
+- `useScroll` – React hook to observe scroll position ([example](https://github.com/zihadm654/precedent/blob/main/components/layout/navbar.tsx#L12))
 - `nFormatter` – Format numbers with suffixes like `1.2k` or `1.2M`
 - `capitalize` – Capitalize the first letter of a string
 - `truncate` – Truncate a string to a specified length
