@@ -1,27 +1,27 @@
-import { redirect } from "next/navigation"
+import { redirect } from "next/navigation";
 
-import { getCurrentUser } from "@/lib/session"
-import { EmptyPlaceholder } from "@/components/shared/empty-placeholder"
-import { DashboardHeader } from "@/components/dashboard/header"
-import { DashboardShell } from "@/components/dashboard/shell"
-import { Button } from "@/components/ui/button"
+import { DashboardHeader } from "@/components/dashboard/header";
+import { DashboardShell } from "@/components/dashboard/shell";
+import { EmptyPlaceholder } from "@/components/shared/empty-placeholder";
+import { Button } from "@/components/ui/button";
+import { getCurrentUser } from "@/lib/session";
+import { constructMetadata } from "@/lib/utils";
 
-export const metadata = {
-  title: "Dashboard",
-}
+export const metadata = constructMetadata({
+  title: "Settings – SaaS Starter",
+  description: "Overview of your account and activities.",
+});
 
 export default async function DashboardPage() {
-  const user = await getCurrentUser()
+  const user = await getCurrentUser();
 
   if (!user) {
-    redirect("/login")
+    redirect("/login");
   }
 
   return (
     <DashboardShell>
-      <DashboardHeader heading="Panel" text="Create and manage content.">
-        <Button>Fake button</Button>
-      </DashboardHeader>
+      <DashboardHeader heading="Panel" text="Create and manage content." />
       <div>
         <EmptyPlaceholder>
           <EmptyPlaceholder.Icon name="post" />
@@ -33,5 +33,5 @@ export default async function DashboardPage() {
         </EmptyPlaceholder>
       </div>
     </DashboardShell>
-  )
+  );
 }

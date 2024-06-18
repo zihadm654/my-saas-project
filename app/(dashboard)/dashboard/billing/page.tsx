@@ -1,26 +1,27 @@
-import { redirect } from "next/navigation"
+import { redirect } from "next/navigation";
 
-import { getCurrentUser } from "@/lib/session"
-import { getUserSubscriptionPlan } from "@/lib/subscription"
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
-import { BillingInfo } from "@/components/billing-info"
-import { DashboardHeader } from "@/components/dashboard/header"
-import { Icons } from "@/components/shared/icons"
-import { DashboardShell } from "@/components/dashboard/shell"
+import { BillingInfo } from "@/components/billing-info";
+import { DashboardHeader } from "@/components/dashboard/header";
+import { DashboardShell } from "@/components/dashboard/shell";
+import { Icons } from "@/components/shared/icons";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { getCurrentUser } from "@/lib/session";
+import { getUserSubscriptionPlan } from "@/lib/subscription";
+import { constructMetadata } from "@/lib/utils";
 
-export const metadata = {
-  title: "Billing",
+export const metadata = constructMetadata({
+  title: "Billing – SaaS Starter",
   description: "Manage billing and your subscription plan.",
-}
+});
 
 export default async function BillingPage() {
-  const user = await getCurrentUser()
+  const user = await getCurrentUser();
 
   if (!user) {
-    redirect("/login")
+    redirect("/login");
   }
 
-  const subscriptionPlan = await getUserSubscriptionPlan(user.id)
+  const userSubscriptionPlan = await getUserSubscriptionPlan(user.id);
 
   return (
     <DashboardShell>
@@ -33,8 +34,8 @@ export default async function BillingPage() {
           <Icons.warning />
           <AlertTitle>This is a demo app.</AlertTitle>
           <AlertDescription>
-            SaaS Starter app is a demo app using a Stripe test environment. You can
-            find a list of test card numbers on the{" "}
+            SaaS Starter app is a demo app using a Stripe test environment. You
+            can find a list of test card numbers on the{" "}
             <a
               href="https://stripe.com/docs/testing#cards"
               target="_blank"
@@ -46,10 +47,8 @@ export default async function BillingPage() {
             .
           </AlertDescription>
         </Alert>
-        <BillingInfo
-          subscriptionPlan={subscriptionPlan}
-        />
+        <BillingInfo userSubscriptionPlan={userSubscriptionPlan} />
       </div>
     </DashboardShell>
-  )
+  );
 }

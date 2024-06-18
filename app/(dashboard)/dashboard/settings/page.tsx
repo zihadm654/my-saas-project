@@ -1,14 +1,15 @@
 import { redirect } from "next/navigation";
 
 import { getCurrentUser } from "@/lib/session";
+import { constructMetadata } from "@/lib/utils";
 import { DashboardHeader } from "@/components/dashboard/header";
 import { DashboardShell } from "@/components/dashboard/shell";
-import { UserNameForm } from "@/components/forms/user-name-form";
+import SettingsForm from "@/components/forms/user-name-form";
 
-export const metadata = {
-  title: "Settings",
-  description: "Manage account and website settings.",
-};
+export const metadata = constructMetadata({
+  title: "Settings – SaaS Starter",
+  description: "Configure your account and website settings.",
+});
 
 export default async function SettingsPage() {
   const user = await getCurrentUser();
@@ -24,7 +25,7 @@ export default async function SettingsPage() {
         text="Manage account and website settings."
       />
       <div className="grid gap-10">
-        <UserNameForm />
+        <SettingsForm />
       </div>
     </DashboardShell>
   );
